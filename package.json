@@ -1,0 +1,42 @@
+{
+  "name": "airalo-home-test",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.6.0",
+  "scripts": {
+    "lint": "pnpm -r run lint",
+    "lint:fix": "pnpm -r run lint:fix",
+    "lint:api": "pnpm --filter @airalo/api lint",
+    "lint:web": "pnpm --filter @airalo/web lint",
+    "lint:shared": "pnpm --filter @airalo/shared lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "pnpm -r run test",
+    "test:unit": "pnpm -r run test:unit",
+    "test:integration": "pnpm --filter @airalo/api test:integration",
+    "test:spec": "pnpm --filter @airalo/api test:spec",
+    "test:state": "pnpm --filter @airalo/api test:state",
+    "test:perf": "pnpm -r run test:perf",
+    "test:a11y": "pnpm --filter @airalo/web test:a11y",
+    "test:a11y:local": "pnpm --filter @airalo/web test:a11y:local",
+    "test:a11y:debug": "pnpm --filter @airalo/web test:a11y:debug",
+    "test:e2e": "pnpm --filter @airalo/web test:e2e",
+    "test:e2e:local": "pnpm --filter @airalo/web test:e2e:local",
+    "test:e2e:debug": "pnpm --filter @airalo/web test:e2e:debug",
+    "build": "pnpm -r run build"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^8.57.2",
+    "@typescript-eslint/parser": "^8.57.2",
+    "eslint": "^10.1.0",
+    "eslint-plugin-jest": "^29.15.1",
+    "eslint-plugin-playwright": "^2.10.1",
+    "prettier": "^3.8.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.57.2"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
+  }
+}

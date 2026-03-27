@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# Test results & reports
+coverage
+.playwright
+playwright-report
+test-results
+allure-results
+allure-report
+allure-history
+
+# OS / editor
+.DS_Store
+*.swp
+*.swo
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

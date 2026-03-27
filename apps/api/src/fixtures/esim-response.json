@@ -1,0 +1,39 @@
+{
+  "data": {
+    "id": 11001,
+    "created_at": "2026-03-27 10:00:00",
+    "iccid": "8901234567890000001",
+    "lpa": "lpa.airalo.com",
+    "imsis": null,
+    "matching_id": "TEST_MATCH_1",
+    "qrcode": "LPA:1$lpa.airalo.com$TEST_MATCH_1",
+    "qrcode_url": "https://sandbox.airalo.com/qr?id=1",
+    "direct_apple_installation_url": "https://esimsetup.apple.com/esim_qrcode_provisioning?carddata=LPA:1$lpa.airalo.com$TEST_MATCH_1",
+    "airalo_code": null,
+    "apn_type": "automatic",
+    "apn_value": null,
+    "is_roaming": true,
+    "confirmation_code": "1234",
+    "brand_settings_name": null,
+    "recycled": false,
+    "recycled_at": null,
+    "simable": {
+      "id": 9666,
+      "created_at": "2026-03-27 10:00:00",
+      "code": "20260327-009666",
+      "description": "6 sim moshi-moshi-7days-1gb",
+      "type": "sim",
+      "package_id": "moshi-moshi-7days-1gb",
+      "quantity": 6,
+      "package": "Moshi Moshi-1 GB - 7 Days",
+      "esim_type": "Prepaid",
+      "validity": 7,
+      "price": 4.5,
+      "data": "1 GB",
+      "currency": "USD"
+    }
+  },
+  "meta": {
+    "message": "success"
+  }
+}

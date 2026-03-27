@@ -1,0 +1,29 @@
+{
+  "name": "@airalo/shared",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "main": "dist/src/index.js",
+  "types": "src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/src/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --passWithNoTests",
+    "test:unit": "NODE_OPTIONS=--experimental-vm-modules jest --runInBand --passWithNoTests"
+  },
+  "dependencies": {
+    "zod": "^3.25.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "jest": "^30.3.0",
+    "typescript": "^5.9.3"
+  }
+}

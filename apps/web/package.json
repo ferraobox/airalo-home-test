@@ -1,0 +1,37 @@
+{
+  "name": "@airalo/web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "lint": "eslint src/ test/",
+    "lint:fix": "eslint src/ test/ --fix",
+    "test": "DOTENV_CONFIG_PATH=../../.env NODE_OPTIONS=--experimental-vm-modules jest --runInBand",
+    "test:a11y": "DOTENV_CONFIG_PATH=../../.env playwright test test/a11y",
+    "test:a11y:local": "DOTENV_CONFIG_PATH=../../.env playwright test test/a11y --headed --retries=0 --reporter=list",
+    "test:a11y:debug": "DOTENV_CONFIG_PATH=../../.env PWDEBUG=1 playwright test test/a11y --headed --retries=0",
+    "test:e2e": "DOTENV_CONFIG_PATH=../../.env playwright test test/e2e",
+    "test:e2e:local": "DOTENV_CONFIG_PATH=../../.env playwright test test/e2e --headed --retries=0 --reporter=list",
+    "test:e2e:debug": "DOTENV_CONFIG_PATH=../../.env PWDEBUG=1 playwright test test/e2e --headed --retries=0",
+    "test:perf": "DOTENV_CONFIG_PATH=../../.env playwright test test/perf"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2",
+    "allure-js-commons": "^3.6.0",
+    "allure-playwright": "^3.6.0",
+    "web-vitals": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.29",
+    "allure-jest": "^3.6.0",
+    "axe-core": "4.11.1",
+    "dotenv": "^17.3.1",
+    "jest": "^30.3.0",
+    "jest-environment-jsdom": "^30.3.0",
+    "ts-jest": "^29.4.6",
+    "tsx": "^4.19.4",
+    "typescript": "^5.9.3"
+  }
+}

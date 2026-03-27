@@ -1,0 +1,319 @@
+name: Web E2E Tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - 'packages/shared/**'
+      - '.github/workflows/web-tests.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - 'packages/shared/**'
+      - '.github/workflows/web-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Lint web source & tests
+        run: pnpm --filter @airalo/web lint
+
+  unit-tests:
+    name: Web Unit Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Run web unit tests
+        run: pnpm --filter @airalo/web test:unit
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-unit-allure-results
+          path: apps/web/allure-results
+          retention-days: 30
+
+  e2e-tests:
+    name: E2E Browser Tests (${{ matrix.country }}/${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint]
+    strategy:
+      fail-fast: false
+      matrix:
+        country: [japan]
+        language: [en]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm --filter @airalo/web exec playwright install --with-deps chromium
+
+      - name: Run E2E tests (${{ matrix.country }}/${{ matrix.language }})
+        env:
+          AIRALO_WEB_URL: ${{ secrets.AIRALO_WEB_URL }}
+          AIRALO_COUNTRY: ${{ matrix.country }}
+          AIRALO_LANGUAGE: ${{ matrix.language }}
+        run: pnpm --filter @airalo/web test:e2e
+
+      - name: Upload Playwright traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces-${{ matrix.country }}-${{ matrix.language }}
+          path: apps/web/test-results
+          retention-days: 7
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-e2e-allure-results-${{ matrix.country }}-${{ matrix.language }}
+          path: apps/web/allure-results
+          retention-days: 30
+
+  accessibility-tests:
+    name: Accessibility Tests (${{ matrix.country }}/${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint]
+    strategy:
+      fail-fast: false
+      matrix:
+        country: [japan]
+        language: [en]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm --filter @airalo/web exec playwright install --with-deps chromium
+
+      - name: Run accessibility tests (${{ matrix.country }}/${{ matrix.language }})
+        env:
+          AIRALO_WEB_URL: ${{ secrets.AIRALO_WEB_URL }}
+          AIRALO_COUNTRY: ${{ matrix.country }}
+          AIRALO_LANGUAGE: ${{ matrix.language }}
+        run: pnpm --filter @airalo/web test:a11y
+
+      - name: Upload Playwright traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-traces-${{ matrix.country }}-${{ matrix.language }}
+          path: apps/web/test-results
+          retention-days: 7
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-a11y-allure-results-${{ matrix.country }}-${{ matrix.language }}
+          path: apps/web/allure-results
+          retention-days: 30
+
+  performance-tests:
+    name: Core Web Vitals Performance Tests (${{ matrix.country }}/${{ matrix.language }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    needs: [lint]
+    strategy:
+      fail-fast: false
+      matrix:
+        country: [japan]
+        language: [en]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright browsers
+        run: pnpm --filter @airalo/web exec playwright install --with-deps chromium
+
+      - name: Run performance tests (${{ matrix.country }}/${{ matrix.language }})
+        env:
+          AIRALO_WEB_URL: ${{ secrets.AIRALO_WEB_URL }}
+          AIRALO_COUNTRY: ${{ matrix.country }}
+          AIRALO_LANGUAGE: ${{ matrix.language }}
+        run: pnpm --filter @airalo/web test:perf
+
+      - name: Upload Playwright traces
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: perf-traces-${{ matrix.country }}-${{ matrix.language }}
+          path: apps/web/test-results
+          retention-days: 7
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-perf-allure-results-${{ matrix.country }}-${{ matrix.language }}
+          path: apps/web/allure-results
+          retention-days: 30
+
+  allure-report:
+    name: Generate Allure Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    needs: [unit-tests, e2e-tests, accessibility-tests, performance-tests]
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download unit test results
+        uses: actions/download-artifact@v4
+        with:
+          name: web-unit-allure-results
+          path: allure-results/unit
+        continue-on-error: true
+
+      - name: Download E2E results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: web-e2e-allure-results-*
+          path: allure-results/e2e
+          merge-multiple: true
+        continue-on-error: true
+
+      - name: Download accessibility results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: web-a11y-allure-results-*
+          path: allure-results/a11y
+          merge-multiple: true
+        continue-on-error: true
+
+      - name: Download performance results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: web-perf-allure-results-*
+          path: allure-results/perf
+          merge-multiple: true
+        continue-on-error: true
+
+      - name: Merge Allure results
+        run: |
+          mkdir -p allure-results/merged
+          cp -r allure-results/unit/* allure-results/merged/ 2>/dev/null || true
+          cp -r allure-results/e2e/* allure-results/merged/ 2>/dev/null || true
+          cp -r allure-results/a11y/* allure-results/merged/ 2>/dev/null || true
+          cp -r allure-results/perf/* allure-results/merged/ 2>/dev/null || true
+
+      - name: Test results summary
+        if: always()
+        run: |
+          echo "## Web Test Results Summary" >> "$GITHUB_STEP_SUMMARY"
+          total=$(find allure-results/merged -name '*-result.json' 2>/dev/null | wc -l)
+          passed=$(grep -rl '"status":"passed"' allure-results/merged/ 2>/dev/null | wc -l)
+          failed=$(grep -rl '"status":"failed"' allure-results/merged/ 2>/dev/null | wc -l)
+          broken=$(grep -rl '"status":"broken"' allure-results/merged/ 2>/dev/null | wc -l)
+          skipped=$(grep -rl '"status":"skipped"' allure-results/merged/ 2>/dev/null | wc -l)
+          echo "| Metric | Count |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|--------|-------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Total  | $total |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ✅ Passed | $passed |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ❌ Failed | $failed |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| 🔧 Broken | $broken |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| ⏭️ Skipped | $skipped |" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Restore Allure history from gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          path: gh-pages
+        continue-on-error: true
+
+      - name: Copy previous history
+        run: |
+          mkdir -p allure-history
+          cp -r gh-pages/web-allure/history allure-history/ 2>/dev/null || true
+
+      - name: Generate Allure Report
+        uses: simple-elf/allure-report-action@v1.13
+        if: always()
+        with:
+          allure_results: allure-results/merged
+          allure_report: allure-report
+          allure_history: allure-history
+
+      - name: Upload Allure Report artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: web-allure-report
+          path: allure-report
+          retention-days: 30
+
+      - name: Publish Allure Report to GitHub Pages
+        if: always() && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          destination_dir: web-allure
+          keep_files: true

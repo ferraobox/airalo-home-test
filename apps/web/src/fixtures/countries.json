@@ -1,0 +1,28 @@
+{
+  "japan": {
+    "id": "japan",
+    "urlSlug": "japan-esim",
+    "operator": "SoftBank",
+    "localized": {
+      "en": {
+        "name": "Japan",
+        "searchTerm": "Japan",
+        "pageHeading": "Japan eSIMs",
+        "locationTitle": "Japan",
+        "breadcrumbText": "Japan"
+      }
+    },
+    "tabs": [
+      { "id": "standard", "firstCardSpec": "/^\\d+$/" },
+      { "id": "unlimited", "firstCardSpec": "Unlimited" }
+    ],
+    "targetPackage": {
+      "tab": "unlimited",
+      "durationKey": "7days",
+      "urlSlugPattern": "7days.*unlimited"
+    },
+    "planDetails": {
+      "minPolicies": 3
+    }
+  }
+}

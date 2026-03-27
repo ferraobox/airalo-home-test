@@ -1,0 +1,42 @@
+{
+  "en": {
+    "id": "en",
+    "name": "English",
+    "urlPrefix": "",
+    "searchInputName": "/search/i",
+    "cookieAcceptButton": "/^Accept$/i",
+    "notificationDenyButton": "/don't allow/i",
+    "pageTitle": "/Airalo/i",
+    "homeTabs": {
+      "popular": "/popular/i",
+      "local": "/local/i",
+      "regional": "/regional/i",
+      "global": "/global/i"
+    },
+    "packagePage": {
+      "chooseYourPackage": "/choose your package/i",
+      "buyNow": "/buy now/i",
+      "packageDetails": "/package details/i",
+      "broaderCoverage": "/broader coverage/i",
+      "fairUsage": "/fair usage/i"
+    },
+    "packageTabs": {
+      "standard": "/standard/i",
+      "unlimited": "/unlimited/i",
+      "dataOnly": "/data only/i"
+    },
+    "packageData": {
+      "unlimitedLabel": "Unlimited",
+      "dataUnit": "GB",
+      "durations": {
+        "7days": "7 days",
+        "15days": "15 days",
+        "30days": "30 days"
+      }
+    },
+    "planPolicies": {
+      "required": ["activation", "validity"],
+      "fairUsageDescPattern": "Mbps|speed"
+    }
+  }
+}

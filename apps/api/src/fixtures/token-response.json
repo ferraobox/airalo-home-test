@@ -1,0 +1,10 @@
+{
+  "data": {
+    "token_type": "Bearer",
+    "expires_in": 31622400,
+    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.test-token-fixture"
+  },
+  "meta": {
+    "message": "success"
+  }
+}

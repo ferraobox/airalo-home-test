@@ -1,0 +1,9 @@
+{
+  "data": {
+    "message": "The given data was invalid.",
+    "errors": {
+      "package_id": ["The package id field is required."],
+      "quantity": ["The quantity field is required."]
+    }
+  }
+}

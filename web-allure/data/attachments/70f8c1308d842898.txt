@@ -1,0 +1,6 @@
+Scan: Homepage — Full Page
+Violations: 1 (critical/serious: 1)
+Passes: 28
+
+Violations:
+[critical] aria-required-children: Ensure elements with an ARIA role that require child roles contain them (2 instances)

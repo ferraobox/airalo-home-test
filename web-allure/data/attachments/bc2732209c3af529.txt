@@ -1,0 +1,8 @@
+Scan: Japan eSIM — Full Page
+Violations: 3 (critical/serious: 3)
+Passes: 27
+
+Violations:
+[critical] aria-required-children: Ensure elements with an ARIA role that require child roles contain them (3 instances)
+[critical] aria-valid-attr-value: Ensure all ARIA attributes have valid values (4 instances)
+[serious] color-contrast: Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds (1 instance)

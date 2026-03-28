@@ -1,0 +1,5 @@
+Card price : $27.00
+Cart price : $27.00
+Card (num) : 27.00
+Cart (num) : 27.00
+Match      : ✓

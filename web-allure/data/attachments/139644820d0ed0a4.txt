@@ -1,0 +1,8 @@
+Scan: Homepage — Full Page
+Violations: 3 (critical/serious: 3)
+Passes: 29
+
+Violations:
+[serious] aria-prohibited-attr: Ensure ARIA attributes are not prohibited for an element's role (1 instance)
+[critical] aria-required-children: Ensure elements with an ARIA role that require child roles contain them (2 instances)
+[serious] svg-img-alt: Ensure <svg> elements with an img, graphics-document or graphics-symbol role have accessible text (1 instance)

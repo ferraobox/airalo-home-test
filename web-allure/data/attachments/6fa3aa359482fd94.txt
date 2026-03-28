@@ -1,0 +1,5 @@
+Provider activation policy
+Validity policy
+IP routing
+Top-up option
+Fair usage policy

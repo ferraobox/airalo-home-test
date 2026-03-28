@@ -1,0 +1,572 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "Airalo logo" [ref=e7] [cursor=pointer]:
+          - /url: /
+          - img "Airalo" [ref=e8]
+        - paragraph [ref=e9]: Directs to Airalo homepage.
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - button "Language" [ref=e15] [cursor=pointer]:
+            - img [ref=e16]
+          - paragraph [ref=e18]: Opens language selection menu when selected.
+        - generic [ref=e19]:
+          - button "Currency" [ref=e21] [cursor=pointer]:
+            - img [ref=e22]
+          - paragraph [ref=e24]: Opens currency selection menu when selected.
+        - generic [ref=e25]:
+          - button "Log in" [ref=e26] [cursor=pointer]
+          - paragraph [ref=e27]: Opens option to log in to an existing Airalo account.
+          - button "Sign up" [ref=e28] [cursor=pointer]
+          - paragraph [ref=e29]: Opens option sign up for an Airalo account.
+    - navigation [ref=e31]:
+      - list [ref=e32]:
+        - listitem [ref=e33] [cursor=pointer]:
+          - link "Home" [ref=e34]:
+            - /url: /
+          - paragraph [ref=e35]: Directs to Airalo homepage.
+        - listitem [ref=e36] [cursor=pointer]:
+          - link "eSIM Store" [ref=e37]:
+            - /url: /esim
+          - paragraph [ref=e38]: Directs to eSIM store.
+        - listitem [ref=e39] [cursor=pointer]:
+          - link "How Airalo Works" [ref=e40]:
+            - /url: /how-airalo-works
+          - paragraph [ref=e41]: Directs to How Airalo works webpage.
+        - listitem [ref=e42] [cursor=pointer]:
+          - link "About Airalo" [ref=e43]:
+            - /url: /about-us/about-airalo
+          - paragraph [ref=e44]: Directs to About Airalo webpage.
+        - listitem [ref=e45] [cursor=pointer]:
+          - link "Magazine" [ref=e46]:
+            - /url: /blog
+          - paragraph [ref=e47]: Directs to Airalo magazine.
+        - listitem [ref=e48] [cursor=pointer]:
+          - link "Help" [ref=e49]:
+            - /url: /help
+          - paragraph [ref=e50]: Directs to Airalo help center.
+    - combobox [ref=e55]:
+      - generic [ref=e56]:
+        - generic [ref=e57]:
+          - img [ref=e59]
+          - textbox "Search store" [ref=e61]:
+            - /placeholder: Where do you need an eSIM?
+          - paragraph [ref=e62]: Provides list of locations based on entered search term.
+        - generic [ref=e63]:
+          - button "Locations" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]: Locations
+            - img [ref=e66]
+          - paragraph [ref=e68]: Opens list of locations for eSIMs.
+    - main [ref=e71]:
+      - generic [ref=e72]:
+        - region "Homepage hero section" [ref=e73]:
+          - paragraph [ref=e74]: Displays different content sections related to Airalo's products and features.
+          - generic [ref=e75]:
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - heading "A better way to stay connected" [level=1] [ref=e81]
+                  - paragraph [ref=e82]: Buy eSIMs for affordable, flexible coverage around the world — choose from 200+ locations.
+                - generic [ref=e84]:
+                  - button "Explore eSIM Store" [ref=e85] [cursor=pointer]
+                  - paragraph [ref=e86]: Directs to the dedicated page about eSIM Store.
+                  - button "Sign up" [ref=e87] [cursor=pointer]
+                  - paragraph [ref=e88]: Opens option sign up for an Airalo account.
+                  - generic [ref=e89]:
+                    - generic [ref=e90]:
+                      - generic [ref=e91]:
+                        - link "Download iOS app" [ref=e92] [cursor=pointer]:
+                          - /url: https://apps.apple.com/app/airalo-esim-travel-internet/id1475911720
+                          - img [ref=e93]
+                          - text: Download iOS app
+                        - paragraph [ref=e97]: Directs to Airalo page of Apple's App Store.
+                      - generic [ref=e98]:
+                        - generic [ref=e99]: Rating
+                        - generic [ref=e100]: "4.7"
+                        - generic [ref=e101]:
+                          - generic [ref=e102]:
+                            - img [ref=e104]
+                            - img [ref=e107]
+                            - img [ref=e110]
+                            - img [ref=e113]
+                            - img [ref=e116]
+                          - generic [ref=e118]:
+                            - img [ref=e120]
+                            - img [ref=e123]
+                            - img [ref=e126]
+                            - img [ref=e129]
+                            - img [ref=e132]
+                    - generic [ref=e134]:
+                      - generic [ref=e135]:
+                        - link "Download Android app" [ref=e136] [cursor=pointer]:
+                          - /url: https://play.google.com/store/apps/details?id=com.mobillium.airalo
+                          - img [ref=e137]
+                          - text: Download Android app
+                        - paragraph [ref=e144]: Directs to Airalo page of Google Play store.
+                      - generic [ref=e145]:
+                        - generic [ref=e146]: Rating
+                        - generic [ref=e147]: "4.6"
+                        - generic [ref=e148]:
+                          - generic [ref=e149]:
+                            - img [ref=e151]
+                            - img [ref=e154]
+                            - img [ref=e157]
+                            - img [ref=e160]
+                            - img [ref=e163]
+                          - generic [ref=e165]:
+                            - img [ref=e167]
+                            - img [ref=e170]
+                            - img [ref=e173]
+                            - img [ref=e176]
+                            - img [ref=e179]
+              - img [ref=e183]
+            - generic [ref=e293]:
+              - button "Previous page" [ref=e294] [cursor=pointer]:
+                - img [ref=e295]
+              - list [ref=e297]:
+                - listitem [ref=e298]:
+                  - button "Page 1" [ref=e299] [cursor=pointer]
+                - listitem [ref=e301]:
+                  - button "Page 2" [ref=e302] [cursor=pointer]
+                - listitem [ref=e303]:
+                  - button "Page 3" [ref=e304] [cursor=pointer]
+                - listitem [ref=e305]:
+                  - button "Page 4" [ref=e306] [cursor=pointer]
+              - button "Next page" [ref=e307] [cursor=pointer]:
+                - img [ref=e308]
+        - generic [ref=e312]:
+          - img [ref=e314]
+          - img [ref=e391]
+          - generic [ref=e497]:
+            - heading "Why do over 20 million people choose Airalo?" [level=3] [ref=e498]
+            - list [ref=e499]:
+              - listitem [ref=e500]:
+                - generic [ref=e501]:
+                  - img [ref=e503]
+                  - paragraph [ref=e505]: Local, regional, and global coverage for 200+ locations
+              - listitem [ref=e506]:
+                - generic [ref=e507]:
+                  - img [ref=e509]
+                  - paragraph [ref=e511]: Flexible packages, including unlimited data options
+              - listitem [ref=e512]:
+                - generic [ref=e513]:
+                  - img [ref=e515]
+                  - paragraph [ref=e517]: App available in 53 languages, multiple currencies
+              - listitem [ref=e518]:
+                - generic [ref=e519]:
+                  - img [ref=e521]
+                  - paragraph [ref=e525]: Easy installation and set up to get connected in minutes
+        - region "Homepage video section" [ref=e526]:
+          - paragraph [ref=e527]: Displays video content related to Airalo's products and features.
+          - generic [ref=e528]:
+            - generic "Video section selector" [ref=e529]:
+              - tablist [ref=e531]:
+                - tab "How it works" [selected] [ref=e532] [cursor=pointer]:
+                  - generic [ref=e533]: How it works
+                - paragraph [ref=e534]: Displays video content related to How Airalo works
+                - tab "Learn with Airalo" [ref=e535] [cursor=pointer]:
+                  - generic [ref=e536]: Learn with Airalo
+                - paragraph [ref=e537]: Displays video content related to learning about Airalo and eSIMs
+            - tabpanel "How it works" [ref=e539]:
+              - generic [ref=e541]:
+                - generic "Embedded video section" [ref=e542]:
+                  - paragraph [ref=e543]: Displays embedded video content.
+                  - button "What is an eSIM?" [disabled] [ref=e545]:
+                    - img [ref=e548]
+                - paragraph [ref=e552]: What is an eSIM?
+        - generic [ref=e553]:
+          - img [ref=e556]
+          - generic [ref=e713]:
+            - tablist [ref=e716]:
+              - tab "Popular" [selected] [ref=e717] [cursor=pointer]:
+                - generic [ref=e718]:
+                  - img [ref=e720]
+                  - text: Popular
+              - paragraph [ref=e722]: Displays popular eSIM packages that can be purchased when selected.
+              - tab "Local" [ref=e723] [cursor=pointer]:
+                - generic [ref=e724]:
+                  - img [ref=e726]
+                  - text: Local
+              - paragraph [ref=e728]: Displays eSIM packages for specific countries that can be purchased when selected.
+              - tab "Regional" [ref=e729] [cursor=pointer]:
+                - generic [ref=e730]:
+                  - img [ref=e732]
+                  - text: Regional
+              - paragraph [ref=e734]: Displays eSIM packages for specific regions that can be purchased when selected.
+              - tab "Global" [ref=e735] [cursor=pointer]:
+                - generic [ref=e736]:
+                  - img [ref=e738]
+                  - text: Global
+              - paragraph [ref=e740]: Displays eSIM packages for global coverage that can be purchased when selected.
+            - tabpanel "Popular" [ref=e742]:
+              - generic [ref=e743]:
+                - generic [ref=e744]:
+                  - generic [ref=e745]: Get eSIMs for popular locations
+                  - generic [ref=e746]: Explore our most popular eSIMs — packages start from the shown price.
+                - generic [ref=e747]:
+                  - button "View all locations" [ref=e748] [cursor=pointer]
+                  - paragraph [ref=e749]: Directs to all coverage locations when selected.
+                - generic [ref=e751]:
+                  - link "Select United States" [ref=e752] [cursor=pointer]:
+                    - /url: /united-states-esim
+                    - generic [ref=e753]:
+                      - img "United States" [ref=e754]
+                      - generic [ref=e756]: United States
+                      - generic [ref=e758]:
+                        - generic [ref=e759]: $4.00
+                        - generic [ref=e760]: USD
+                  - link "Select Japan" [ref=e761] [cursor=pointer]:
+                    - /url: /japan-esim
+                    - generic [ref=e762]:
+                      - img "Japan" [ref=e763]
+                      - generic [ref=e765]: Japan
+                      - generic [ref=e767]:
+                        - generic [ref=e768]: $4.00
+                        - generic [ref=e769]: USD
+                  - link "Select Italy" [ref=e770] [cursor=pointer]:
+                    - /url: /italy-esim
+                    - generic [ref=e771]:
+                      - img "Italy" [ref=e772]
+                      - generic [ref=e774]: Italy
+                      - generic [ref=e776]:
+                        - generic [ref=e777]: $4.00
+                        - generic [ref=e778]: USD
+                  - link "Select United Kingdom" [ref=e779] [cursor=pointer]:
+                    - /url: /united-kingdom-esim
+                    - generic [ref=e780]:
+                      - img "United Kingdom" [ref=e781]
+                      - generic [ref=e783]: United Kingdom
+                      - generic [ref=e785]:
+                        - generic [ref=e786]: $4.00
+                        - generic [ref=e787]: USD
+                  - link "Select Spain" [ref=e788] [cursor=pointer]:
+                    - /url: /spain-esim
+                    - generic [ref=e789]:
+                      - img "Spain" [ref=e790]
+                      - generic [ref=e792]: Spain
+                      - generic [ref=e794]:
+                        - generic [ref=e795]: $4.00
+                        - generic [ref=e796]: USD
+                  - link "Select Mexico" [ref=e797] [cursor=pointer]:
+                    - /url: /mexico-esim
+                    - generic [ref=e798]:
+                      - img "Mexico" [ref=e799]
+                      - generic [ref=e801]: Mexico
+                      - generic [ref=e803]:
+                        - generic [ref=e804]: $4.00
+                        - generic [ref=e805]: USD
+                  - link "Select France" [ref=e806] [cursor=pointer]:
+                    - /url: /france-esim
+                    - generic [ref=e807]:
+                      - img "France" [ref=e808]
+                      - generic [ref=e810]: France
+                      - generic [ref=e812]:
+                        - generic [ref=e813]: $4.00
+                        - generic [ref=e814]: USD
+                  - link "Select China" [ref=e815] [cursor=pointer]:
+                    - /url: /china-esim
+                    - generic [ref=e816]:
+                      - img "China" [ref=e817]
+                      - generic [ref=e819]: China
+                      - generic [ref=e821]:
+                        - generic [ref=e822]: $4.00
+                        - generic [ref=e823]: USD
+                  - link "Select South Korea" [ref=e824] [cursor=pointer]:
+                    - /url: /south-korea-esim
+                    - generic [ref=e825]:
+                      - img "South Korea" [ref=e826]
+                      - generic [ref=e828]: South Korea
+                      - generic [ref=e830]:
+                        - generic [ref=e831]: $4.00
+                        - generic [ref=e832]: USD
+                  - link "Select Canada" [ref=e833] [cursor=pointer]:
+                    - /url: /canada-esim
+                    - generic [ref=e834]:
+                      - img "Canada" [ref=e835]
+                      - generic [ref=e837]: Canada
+                      - generic [ref=e839]:
+                        - generic [ref=e840]: $7.00
+                        - generic [ref=e841]: USD
+                  - link "Select Thailand" [ref=e842] [cursor=pointer]:
+                    - /url: /thailand-esim
+                    - generic [ref=e843]:
+                      - img "Thailand" [ref=e844]
+                      - generic [ref=e846]: Thailand
+                      - generic [ref=e848]:
+                        - generic [ref=e849]: $4.00
+                        - generic [ref=e850]: USD
+                  - link "Select Portugal" [ref=e851] [cursor=pointer]:
+                    - /url: /portugal-esim
+                    - generic [ref=e852]:
+                      - img "Portugal" [ref=e853]
+                      - generic [ref=e855]: Portugal
+                      - generic [ref=e857]:
+                        - generic [ref=e858]: $4.00
+                        - generic [ref=e859]: USD
+                  - paragraph [ref=e860]: Directs to eSIMs for the selected location.
+        - generic [ref=e861]:
+          - generic [ref=e862]:
+            - generic [ref=e863]: Frequently asked questions
+            - generic [ref=e864]:
+              - button "Go to help center" [ref=e865] [cursor=pointer]
+              - paragraph [ref=e866]: Directs to Airalo help center when selected.
+          - generic [ref=e867]:
+            - generic [ref=e869]:
+              - generic [ref=e871]:
+                - button "How do I check if my iOS device supports eSIM?" [ref=e874] [cursor=pointer]:
+                  - generic [ref=e877]: How do I check if my iOS device supports eSIM?
+                  - img [ref=e878]
+                - button "How do I install and set up an eSIM on my iOS device?" [ref=e882] [cursor=pointer]:
+                  - generic [ref=e885]: How do I install and set up an eSIM on my iOS device?
+                  - img [ref=e886]
+                - button "When does my eSIM data package expire?" [ref=e890] [cursor=pointer]:
+                  - generic [ref=e893]: When does my eSIM data package expire?
+                  - img [ref=e894]
+                - button "How do I install and set up an eSIM on my Android device?" [ref=e898] [cursor=pointer]:
+                  - generic [ref=e901]: How do I install and set up an eSIM on my Android device?
+                  - img [ref=e902]
+                - button "How can I get an eSIM?" [ref=e906] [cursor=pointer]:
+                  - generic [ref=e909]: How can I get an eSIM?
+                  - img [ref=e910]
+              - paragraph [ref=e912]: Directs to more information about the FAQ subject.
+            - generic [ref=e915]:
+              - generic [ref=e916]:
+                - generic [ref=e917]:
+                  - generic [ref=e918]: Support
+                  - generic [ref=e919]: Need help? We offer 24/7, multi-language support
+                - generic [ref=e920]:
+                  - generic "Reach out to support" [ref=e921] [cursor=pointer]:
+                    - generic [ref=e922]: Reach out to support
+                    - img [ref=e923]
+                  - paragraph [ref=e925]: Opens chat with support when selected.
+                  - link "Chat on WhatsApp" [ref=e926] [cursor=pointer]:
+                    - /url: https://api.whatsapp.com/send/?phone=19842247256&text=I%27m+continuing+my+conversation+on+WhatsApp.&type=phone_number&app_absent=0
+                    - generic [ref=e927]: Chat on WhatsApp
+                    - img [ref=e928]
+                  - paragraph [ref=e930]: Opens chat with support on WhatsApp when selected.
+              - img [ref=e933]
+        - generic [ref=e977]:
+          - generic [ref=e979]: Connect, explore, and more
+          - generic [ref=e980]:
+            - button "View magazine" [ref=e981] [cursor=pointer]
+            - paragraph [ref=e982]: Directs to Airalo magazine when selected.
+          - generic [ref=e984]:
+            - generic [ref=e985]:
+              - 'img "Fujiyoshida Alternatives: Best Places in Japan to see Cherry Blossoms" [ref=e986]'
+              - generic [ref=e987]:
+                - generic [ref=e988]: "Fujiyoshida Alternatives: Best Places in Japan to see Cherry Blossoms"
+                - link "Read article" [ref=e989] [cursor=pointer]:
+                  - /url: /blog/best-place-cherry-blossom-japan
+                  - generic [ref=e990]: Read article
+                  - img [ref=e991]
+                - paragraph [ref=e993]: Directs to the selected article or post.
+            - generic [ref=e994]:
+              - 'img "How to Celebrate Thailand Lantern Festivals: Yi Peng & Loy Krathong" [ref=e995]'
+              - generic [ref=e996]:
+                - generic [ref=e997]: "How to Celebrate Thailand Lantern Festivals: Yi Peng & Loy Krathong"
+                - link "Read article" [ref=e998] [cursor=pointer]:
+                  - /url: /blog/lantern-festival-thailand
+                  - generic [ref=e999]: Read article
+                  - img [ref=e1000]
+                - paragraph [ref=e1002]: Directs to the selected article or post.
+            - generic [ref=e1003]:
+              - img "Guide to Kenting National Park in Pingtung, Southern Taiwan" [ref=e1004]
+              - generic [ref=e1005]:
+                - generic [ref=e1006]: Guide to Kenting National Park in Pingtung, Southern Taiwan
+                - link "Read article" [ref=e1007] [cursor=pointer]:
+                  - /url: /blog/kenting-national-park
+                  - generic [ref=e1008]: Read article
+                  - img [ref=e1009]
+                - paragraph [ref=e1011]: Directs to the selected article or post.
+            - generic [ref=e1012]:
+              - 'img "Insider''s Guide to Korea''s Cherry Blossom Season: Seoul, Jeju & More" [ref=e1013]'
+              - generic [ref=e1014]:
+                - generic [ref=e1015]: "Insider's Guide to Korea's Cherry Blossom Season: Seoul, Jeju & More"
+                - link "Read article" [ref=e1016] [cursor=pointer]:
+                  - /url: /blog/cherry-blossom-korea
+                  - generic [ref=e1017]: Read article
+                  - img [ref=e1018]
+                - paragraph [ref=e1020]: Directs to the selected article or post.
+            - generic [ref=e1021]:
+              - img "Your Ultimate Guide to Europe's Sleeper Trains" [ref=e1022]
+              - generic [ref=e1023]:
+                - generic [ref=e1024]: Your Ultimate Guide to Europe's Sleeper Trains
+                - link "Read article" [ref=e1025] [cursor=pointer]:
+                  - /url: /blog/sleeper-trains-europe
+                  - generic [ref=e1026]: Read article
+                  - img [ref=e1027]
+                - paragraph [ref=e1029]: Directs to the selected article or post.
+            - generic [ref=e1030]:
+              - img "Things to do in Seoul During the Winter" [ref=e1031]
+              - generic [ref=e1032]:
+                - generic [ref=e1033]: Things to do in Seoul During the Winter
+                - link "Read article" [ref=e1034] [cursor=pointer]:
+                  - /url: /blog/things-to-do-seoul-winter
+                  - generic [ref=e1035]: Read article
+                  - img [ref=e1036]
+                - paragraph [ref=e1038]: Directs to the selected article or post.
+        - region "Download app section" [ref=e1039]:
+          - generic [ref=e1040]:
+            - img [ref=e1043]
+            - generic [ref=e1103]:
+              - generic [ref=e1104]:
+                - generic [ref=e1105]: We've got you covered, wherever
+                - generic [ref=e1106]: Download the Airalo app to easily purchase, manage, and top up eSIMs on-the-go.
+              - generic [ref=e1107]:
+                - generic [ref=e1108]:
+                  - generic [ref=e1109]:
+                    - link "Download iOS app" [ref=e1110] [cursor=pointer]:
+                      - /url: https://apps.apple.com/app/airalo-esim-travel-internet/id1475911720
+                      - img [ref=e1111]
+                      - text: Download iOS app
+                    - paragraph [ref=e1115]: Directs to Airalo page of Apple's App Store.
+                  - generic [ref=e1116]:
+                    - generic [ref=e1117]: Rating
+                    - generic [ref=e1118]: "4.7"
+                    - generic [ref=e1119]:
+                      - generic [ref=e1120]:
+                        - img [ref=e1122]
+                        - img [ref=e1125]
+                        - img [ref=e1128]
+                        - img [ref=e1131]
+                        - img [ref=e1134]
+                      - generic [ref=e1136]:
+                        - img [ref=e1138]
+                        - img [ref=e1141]
+                        - img [ref=e1144]
+                        - img [ref=e1147]
+                        - img [ref=e1150]
+                - generic [ref=e1152]:
+                  - generic [ref=e1153]:
+                    - link "Download Android app" [ref=e1154] [cursor=pointer]:
+                      - /url: https://play.google.com/store/apps/details?id=com.mobillium.airalo
+                      - img [ref=e1155]
+                      - text: Download Android app
+                    - paragraph [ref=e1162]: Directs to Airalo page of Google Play store.
+                  - generic [ref=e1163]:
+                    - generic [ref=e1164]: Rating
+                    - generic [ref=e1165]: "4.6"
+                    - generic [ref=e1166]:
+                      - generic [ref=e1167]:
+                        - img [ref=e1169]
+                        - img [ref=e1172]
+                        - img [ref=e1175]
+                        - img [ref=e1178]
+                        - img [ref=e1181]
+                      - generic [ref=e1183]:
+                        - img [ref=e1185]
+                        - img [ref=e1188]
+                        - img [ref=e1191]
+                        - img [ref=e1194]
+                        - img [ref=e1197]
+      - button [ref=e1199] [cursor=pointer]:
+        - generic [ref=e1200]:
+          - img [ref=e1202]
+          - img [ref=e1205]
+    - generic [ref=e1209]:
+      - generic [ref=e1210]:
+        - generic [ref=e1211]:
+          - generic [ref=e1212]: Our eSIMs
+          - generic [ref=e1213]:
+            - link "eSIM Store" [ref=e1214] [cursor=pointer]:
+              - /url: /esim
+            - link "Unlimited data" [ref=e1215] [cursor=pointer]:
+              - /url: /unlimited-packages
+            - link "Global eSIMs" [ref=e1216] [cursor=pointer]:
+              - /url: /global-esim#esims
+            - link "Regional eSIMs" [ref=e1217] [cursor=pointer]:
+              - /url: /regional-esim#esims
+            - link "Local eSIMs" [ref=e1218] [cursor=pointer]:
+              - /url: /local-esim#esims
+            - link "Refer and earn" [ref=e1219] [cursor=pointer]:
+              - /url: /refer-and-earn
+            - link "Loyalty program" [ref=e1220] [cursor=pointer]:
+              - /url: /loyalty-program
+        - generic [ref=e1221]:
+          - generic [ref=e1222]: About eSIMs
+          - generic [ref=e1223]:
+            - link "What is an eSIM?" [ref=e1224] [cursor=pointer]:
+              - /url: /how-airalo-works/what-is-an-esim
+            - link "How Airalo works" [ref=e1225] [cursor=pointer]:
+              - /url: /how-airalo-works
+            - link "Device compatibility" [ref=e1226] [cursor=pointer]:
+              - /url: /how-airalo-works/device-compatibility
+        - generic [ref=e1227]:
+          - generic [ref=e1228]: Get help
+          - generic [ref=e1229]:
+            - link "Help center" [ref=e1230] [cursor=pointer]:
+              - /url: /help
+            - button "Chat to support" [ref=e1231] [cursor=pointer]
+            - link "Contact us" [ref=e1232] [cursor=pointer]:
+              - /url: /more-info/contact
+        - generic [ref=e1233]:
+          - generic [ref=e1234]: Magazine
+          - link "Latest posts" [ref=e1236] [cursor=pointer]:
+            - /url: /blog
+        - generic [ref=e1237]:
+          - generic [ref=e1238]: Airalo
+          - generic [ref=e1239]:
+            - link "About Airalo" [ref=e1240] [cursor=pointer]:
+              - /url: /about-us/about-airalo
+            - link "Impact" [ref=e1241] [cursor=pointer]:
+              - /url: /about-us/impact
+            - link "Our values" [ref=e1242] [cursor=pointer]:
+              - /url: /about-us/our-values
+            - link "Media center" [ref=e1243] [cursor=pointer]:
+              - /url: /about-us/media-center
+            - link "Newsroom" [ref=e1244] [cursor=pointer]:
+              - /url: /about-us/newsroom
+            - link "Job vacancies" [ref=e1245] [cursor=pointer]:
+              - /url: /airalo-careers/job-vacancies
+            - link "Working at Airalo" [ref=e1246] [cursor=pointer]:
+              - /url: /airalo-careers/working-at-airalo
+        - generic [ref=e1247]:
+          - generic [ref=e1248]: Follow us
+          - generic [ref=e1249]:
+            - link "Facebook" [ref=e1250] [cursor=pointer]:
+              - /url: https://www.facebook.com/airalocom
+              - img [ref=e1251]
+              - text: Facebook
+            - link "Instagram" [ref=e1254] [cursor=pointer]:
+              - /url: https://www.instagram.com/airalo
+              - img [ref=e1255]
+              - text: Instagram
+            - link "X (Twitter)" [ref=e1259] [cursor=pointer]:
+              - /url: https://x.com/airalocom
+              - img [ref=e1260]
+              - text: X (Twitter)
+            - link "TikTok" [ref=e1262] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@airalocom
+              - img [ref=e1263]
+              - text: TikTok
+            - link "LinkedIn" [ref=e1267] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/airalocom/
+              - img [ref=e1268]
+              - text: LinkedIn
+            - link "YouTube" [ref=e1270] [cursor=pointer]:
+              - /url: https://www.youtube.com/channel/UCPL_PzFyZLgMOWOLIpNlkMw
+              - img [ref=e1271]
+              - text: YouTube
+      - img [ref=e1276]
+      - generic [ref=e1391]:
+        - paragraph [ref=e1392]: ©2026 AIRALO
+        - link "Trust center" [ref=e1393] [cursor=pointer]:
+          - /url: https://trust.airalo.com
+        - link "Privacy policy" [ref=e1394] [cursor=pointer]:
+          - /url: /more-info/privacy-policy
+        - link "Legal center" [ref=e1395] [cursor=pointer]:
+          - /url: /legal
+        - link "Partner with us" [ref=e1396] [cursor=pointer]:
+          - /url: https://partners.airalo.com
+        - button "Manage cookies" [ref=e1397] [cursor=pointer]
+        - link "Link directory" [ref=e1398] [cursor=pointer]:
+          - /url: /link-directory
+  - generic:
+    - generic:
+      - iframe
+  - generic: Manage cookie preferences
+```

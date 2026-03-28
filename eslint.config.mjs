@@ -85,12 +85,6 @@ export default tseslint.config(
     },
   },
 
-  // ── Jest rules for API test helpers (non-test files) ──────
-  {
-    files: ['apps/api/test/helpers/**/*.ts'],
-    rules: {},
-  },
-
   // ── Jest rules for web unit tests ─────────────────────────
   {
     files: ['apps/web/test/unit/**/*.test.ts'],

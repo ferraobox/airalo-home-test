@@ -9,7 +9,7 @@ import { jest } from '@jest/globals'
 import type { AxiosInstance } from 'axios'
 import { createEsimService } from '../../src/services/esimService'
 import { fixture } from '../../src/lib/fixture'
-import { buildAxiosError } from '../helpers/factory'
+import { buildAxiosError } from '../../src/helpers/factory'
 
 // ── Mock HTTP factory ───────────────────────────────────────
 

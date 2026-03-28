@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals'
-import { getAxiosStatus, isTransient } from '../../src/lib/retry'
+import { getAxiosStatus, isTransient } from '../lib/retry'
 
 /**
  * Assert that a caught error carries one of the expected HTTP statuses.

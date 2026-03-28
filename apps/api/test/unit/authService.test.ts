@@ -10,7 +10,7 @@ import type { AxiosInstance } from 'axios'
 import { createAuthService } from '../../src/services/authService'
 import { fixture } from '../../src/lib/fixture'
 import { airaloTokenResponseSchema } from '@airalo/shared'
-import { buildAxiosError } from '../helpers/factory'
+import { buildAxiosError } from '../../src/helpers/factory'
 
 // ── Mock HTTP factory ───────────────────────────────────────
 

@@ -9,7 +9,7 @@ import { jest } from '@jest/globals'
 import type { AxiosInstance } from 'axios'
 import { createOrderService } from '../../src/services/orderService'
 import { fixture } from '../../src/lib/fixture'
-import { buildAxiosError } from '../helpers/factory'
+import { buildAxiosError } from '../../src/helpers/factory'
 import { AIRALO_DEFAULT_PACKAGE_ID, AIRALO_DEFAULT_ORDER_QUANTITY } from '@airalo/shared'
 
 // ── Mock HTTP factory ───────────────────────────────────────

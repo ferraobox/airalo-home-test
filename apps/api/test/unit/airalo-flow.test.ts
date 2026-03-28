@@ -1,7 +1,11 @@
 import { jest } from '@jest/globals'
 import { runAiraloOrderFlow } from '../../src/services/flowService'
 import type { AiraloFlowService } from '../../src/services/flowService'
-import { buildOrderResult, buildEsimResult, buildAxiosError } from '../helpers/factory'
+import {
+  buildOrderResult,
+  buildEsimResult,
+  buildAxiosError,
+} from '../../src/helpers/factory'
 
 // ── Helper: create mock service ─────────────────────────────
 

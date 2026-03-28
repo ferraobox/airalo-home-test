@@ -1,4 +1,4 @@
-import type { AiraloOrderResult, AiraloEsimResult } from '../../src/types/airalo'
+import type { AiraloOrderResult, AiraloEsimResult } from '../types/airalo'
 import { AxiosError, type AxiosResponse } from 'axios'
 
 // ── Type helpers ────────────────────────────────────────────

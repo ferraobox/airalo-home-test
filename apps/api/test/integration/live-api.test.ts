@@ -17,7 +17,7 @@ import { createAiraloService } from '../../src/services/airaloService'
 import { loadApiEnv } from '../../src/config/env'
 import { AIRALO_DEFAULT_PACKAGE_ID, AIRALO_DEFAULT_ORDER_QUANTITY } from '@airalo/shared'
 import { retryOnTransient, isTransient, getAxiosStatus } from '../../src/lib/retry'
-import { expectClientError } from '../helpers/assertions'
+import { expectClientError } from '../../src/helpers/assertions'
 
 const env = loadApiEnv()
 const hasCredentials = env.clientId.length > 0 && env.clientSecret.length > 0

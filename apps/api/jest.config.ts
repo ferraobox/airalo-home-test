@@ -18,6 +18,9 @@ const config: Config = {
     '^.+\.ts$': ['ts-jest', { useESM: true }],
   },
 
+  moduleNameMapper: {
+    '^@airalo/shared$': '<rootDir>/../../packages/shared/src/index.ts',
+  },
   setupFiles: ['dotenv/config'],
   testMatch: ['<rootDir>/test/**/*.test.ts'],
   collectCoverageFrom: ['src/**/*.ts'],

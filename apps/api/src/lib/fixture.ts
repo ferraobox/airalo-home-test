@@ -1,11 +1,17 @@
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
+import type { ZodType, z } from 'zod'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-/** Load and parse a JSON fixture by name from src/fixtures/ */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const fixture = (name: string): any =>
-  JSON.parse(readFileSync(join(__dirname, '../fixtures', name), 'utf8'))
+/** Load a raw JSON fixture by name from src/fixtures/ */
+export function fixture(name: string): unknown {
+  return JSON.parse(readFileSync(join(__dirname, '../fixtures', name), 'utf8')) as unknown
+}
+
+/** Load a JSON fixture and validate it through a Zod schema */
+export function typedFixture<T extends ZodType>(name: string, schema: T): z.infer<T> {
+  return schema.parse(fixture(name)) as z.infer<T>
+}

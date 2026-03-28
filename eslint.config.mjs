@@ -78,18 +78,8 @@ export default tseslint.config(
       'jest/no-done-callback': 'error',
       // Disallow jasmine globals (fdescribe, fit, etc.)
       'jest/no-jasmine-globals': 'error',
-      // TS overrides — relaxed for test files
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off',
-      '@typescript-eslint/no-unsafe-call': 'off',
-      '@typescript-eslint/no-unsafe-argument': 'off',
       // jest.fn() mocks trigger false unbound-method warnings
       '@typescript-eslint/unbound-method': 'off',
-      // Sync mock factories wrapped in async are idiomatic
-      '@typescript-eslint/require-await': 'off',
-      // Tests may throw non-Error objects for edge-case coverage
-      '@typescript-eslint/only-throw-error': 'off',
       // State machine tests chain destructured {state, ctx} assignments
       'no-useless-assignment': 'off',
     },
@@ -98,10 +88,7 @@ export default tseslint.config(
   // ── Jest rules for API test helpers (non-test files) ──────
   {
     files: ['apps/api/test/helpers/**/*.ts'],
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unsafe-return': 'off',
-    },
+    rules: {},
   },
 
   // ── Jest rules for web unit tests ─────────────────────────
@@ -118,12 +105,6 @@ export default tseslint.config(
       'jest/no-focused-tests': 'error',
       'jest/valid-title': 'error',
       'jest/no-done-callback': 'error',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off',
-      '@typescript-eslint/no-unsafe-call': 'off',
-      '@typescript-eslint/no-unsafe-argument': 'off',
-      '@typescript-eslint/no-unsafe-return': 'off',
     },
   },
 
@@ -155,12 +136,6 @@ export default tseslint.config(
       'playwright/no-skipped-test': 'warn',
       // Every test must have at least one expect/assertion
       'playwright/expect-expect': 'error',
-      // TS overrides — relaxed for test files
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unsafe-assignment': 'off',
-      '@typescript-eslint/no-unsafe-member-access': 'off',
-      '@typescript-eslint/no-unsafe-call': 'off',
-      '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-floating-promises': 'off',
     },
   },

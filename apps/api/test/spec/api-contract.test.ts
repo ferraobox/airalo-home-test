@@ -8,6 +8,19 @@ import {
 } from '@airalo/shared'
 import { fixture } from '../../src/lib/fixture'
 
+/** Mutable raw fixture for schema rejection / backward-compat tests */
+interface MutableFixture {
+  data: Record<string, unknown> & { sims?: Array<Record<string, unknown>> }
+  meta?: Record<string, unknown>
+  [key: string]: unknown
+}
+
+/** Mutable error fixture for error schema tests */
+interface MutableErrorFixture {
+  data: Record<string, unknown> & { errors?: Record<string, unknown> }
+  [key: string]: unknown
+}
+
 // ── Token contract ──────────────────────────────────────────
 
 describe('token contract', () => {
@@ -18,34 +31,32 @@ describe('token contract', () => {
   })
 
   it('token fixture has correct structure', () => {
-    const token = fixture('token-response.json')
-    expect(token).toHaveProperty('data.access_token')
-    expect(token).toHaveProperty('data.token_type')
-    expect(token).toHaveProperty('data.expires_in')
-    expect(token).toHaveProperty('meta.message')
+    const token = airaloTokenResponseSchema.parse(fixture('token-response.json'))
     expect(typeof token.data.access_token).toBe('string')
+    expect(typeof token.data.token_type).toBe('string')
     expect(typeof token.data.expires_in).toBe('number')
+    expect(typeof token.meta.message).toBe('string')
   })
 
   it('rejects token response with missing data wrapper', () => {
-    const token = fixture('token-response.json')
+    const token = airaloTokenResponseSchema.parse(fixture('token-response.json'))
     expect(() => airaloTokenResponseSchema.parse(token.data)).toThrow()
   })
 
   it('rejects token response with empty access_token', () => {
-    const token = fixture('token-response.json')
-    token.data.access_token = ''
-    expect(() => airaloTokenResponseSchema.parse(token)).toThrow()
+    const raw = fixture('token-response.json') as MutableFixture
+    raw.data.access_token = ''
+    expect(() => airaloTokenResponseSchema.parse(raw)).toThrow()
   })
 
   it('token fixture expires_in is a positive integer', () => {
-    const token = fixture('token-response.json')
+    const token = airaloTokenResponseSchema.parse(fixture('token-response.json'))
     expect(token.data.expires_in).toBeGreaterThan(0)
     expect(Number.isInteger(token.data.expires_in)).toBe(true)
   })
 
   it('token fixture token_type is a non-empty string', () => {
-    const token = fixture('token-response.json')
+    const token = airaloTokenResponseSchema.parse(fixture('token-response.json'))
     expect(token.data.token_type.length).toBeGreaterThan(0)
   })
 })
@@ -60,27 +71,26 @@ describe('order contract', () => {
   })
 
   it('order fixture has correct top-level shape', () => {
-    const order = fixture('order-response.json')
-    expect(order).toHaveProperty('data.id')
-    expect(order).toHaveProperty('data.code')
-    expect(order).toHaveProperty('data.package_id')
-    expect(order).toHaveProperty('data.quantity')
-    expect(order).toHaveProperty('data.sims')
-    expect(order).toHaveProperty('meta.message')
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
+    expect(order.data.id).toBeDefined()
+    expect(order.data.code).toBeDefined()
+    expect(order.data.package_id).toBeDefined()
+    expect(order.data.quantity).toBeDefined()
+    expect(order.data.sims).toBeDefined()
+    expect(order.meta.message).toBeDefined()
   })
 
   it('order fixture has expected number of SIMs', () => {
-    const order = fixture('order-response.json')
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
     expect(order.data.sims).toHaveLength(6)
   })
 
   it('each SIM in order has iccid and matching_id', () => {
-    const order = fixture('order-response.json')
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
     for (const sim of order.data.sims) {
-      expect(sim).toHaveProperty('iccid')
-      expect(sim).toHaveProperty('matching_id')
       expect(typeof sim.iccid).toBe('string')
       expect(sim.iccid.length).toBeGreaterThan(0)
+      expect(sim.matching_id).toBeTruthy()
       // Full SIM properties required by assignment (R2.2, R3.6)
       expect(sim.id).toBeGreaterThan(0)
       expect(sim.lpa).toBeTruthy()
@@ -91,30 +101,30 @@ describe('order contract', () => {
   })
 
   it('all SIM iccids in order are unique', () => {
-    const order = fixture('order-response.json')
-    const iccids = order.data.sims.map((s: { iccid: string }) => s.iccid)
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
+    const iccids = order.data.sims.map((s) => s.iccid)
     expect(new Set(iccids).size).toBe(iccids.length)
   })
 
   it('order has numeric id', () => {
-    const order = fixture('order-response.json')
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
     expect(typeof order.data.id).toBe('number')
   })
 
   it('rejects order with empty sims', () => {
-    const order = fixture('order-response.json')
-    order.data.sims = []
-    expect(() => airaloOrderResponseSchema.parse(order)).toThrow()
+    const raw = fixture('order-response.json') as MutableFixture
+    raw.data.sims = []
+    expect(() => airaloOrderResponseSchema.parse(raw)).toThrow()
   })
 
   it('order code is non-empty string', () => {
-    const order = fixture('order-response.json')
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
     expect(typeof order.data.code).toBe('string')
     expect(order.data.code.length).toBeGreaterThan(0)
   })
 
   it('order package_id matches expected package', () => {
-    const order = fixture('order-response.json')
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
     expect(order.data.package_id).toBe('moshi-moshi-7days-1gb')
   })
 })
@@ -129,21 +139,21 @@ describe('esim contract', () => {
   })
 
   it('esim fixture has correct structure', () => {
-    const esim = fixture('esim-response.json')
-    expect(esim).toHaveProperty('data.id')
-    expect(esim).toHaveProperty('data.iccid')
-    expect(esim).toHaveProperty('data.lpa')
-    expect(esim).toHaveProperty('data.qrcode')
-    expect(esim).toHaveProperty('data.qrcode_url')
-    expect(esim).toHaveProperty('data.matching_id')
-    expect(esim).toHaveProperty('data.is_roaming')
-    expect(esim).toHaveProperty('data.created_at')
-    expect(esim).toHaveProperty('data.simable')
-    expect(esim).toHaveProperty('meta.message')
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
+    expect(esim.data.id).toBeDefined()
+    expect(esim.data.iccid).toBeDefined()
+    expect(esim.data.lpa).toBeDefined()
+    expect(esim.data.qrcode).toBeDefined()
+    expect(esim.data.qrcode_url).toBeDefined()
+    expect(esim.data.matching_id).toBeDefined()
+    expect(esim.data.is_roaming).toBeDefined()
+    expect(esim.data.created_at).toBeDefined()
+    expect(esim.data.simable).toBeDefined()
+    expect(esim.meta.message).toBeDefined()
   })
 
   it('esim fixture has correct property values (R3.6, assignment §Response Body)', () => {
-    const esim = fixture('esim-response.json')
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
     expect(esim.data.id).toBeGreaterThan(0)
     expect(esim.data.iccid).toBeTruthy()
     expect(esim.data.lpa).toBeTruthy()
@@ -157,26 +167,26 @@ describe('esim contract', () => {
   })
 
   it('esim simable references parent order', () => {
-    const esim = fixture('esim-response.json')
-    expect(esim.data.simable).toHaveProperty('package_id')
-    expect(esim.data.simable.package_id).toBe('moshi-moshi-7days-1gb')
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
+    expect(esim.data.simable).toBeDefined()
+    expect(esim.data.simable?.package_id).toBe('moshi-moshi-7days-1gb')
   })
 
   it('esim iccid matches fixture sim', () => {
-    const esim = fixture('esim-response.json')
-    const order = fixture('order-response.json')
-    const orderIccids = order.data.sims.map((s: { iccid: string }) => s.iccid)
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
+    const orderIccids = order.data.sims.map((s) => s.iccid)
     expect(orderIccids).toContain(esim.data.iccid)
   })
 
   it('esim id is a positive number', () => {
-    const esim = fixture('esim-response.json')
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
     expect(typeof esim.data.id).toBe('number')
     expect(esim.data.id).toBeGreaterThan(0)
   })
 
   it('esim lpa field is a valid-looking LPA string', () => {
-    const esim = fixture('esim-response.json')
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
     expect(typeof esim.data.lpa).toBe('string')
     expect(esim.data.lpa.length).toBeGreaterThan(0)
   })
@@ -196,20 +206,21 @@ describe('error contracts', () => {
   })
 
   it('validation error has errors map', () => {
-    const err = fixture('order-validation-error.json')
+    const err = airaloValidationErrorSchema.parse(fixture('order-validation-error.json'))
+    expect(err.data.errors).toBeDefined()
     expect(err.data.errors).toHaveProperty('package_id')
     expect(err.data.errors).toHaveProperty('quantity')
-    expect(Array.isArray(err.data.errors.package_id)).toBe(true)
+    expect(Array.isArray(err.data.errors?.package_id)).toBe(true)
   })
 
   it('auth error message is a non-empty string', () => {
-    const err = fixture('auth-error.json')
+    const err = airaloAuthErrorSchema.parse(fixture('auth-error.json'))
     expect(typeof err.data.message).toBe('string')
     expect(err.data.message.length).toBeGreaterThan(0)
   })
 
   it('validation error message is a non-empty string', () => {
-    const err = fixture('order-validation-error.json')
+    const err = airaloValidationErrorSchema.parse(fixture('order-validation-error.json'))
     expect(typeof err.data.message).toBe('string')
     expect(err.data.message.length).toBeGreaterThan(0)
   })
@@ -255,19 +266,21 @@ describe('backward compatibility — token', () => {
 
 describe('backward compatibility — order', () => {
   it('tolerates unknown fields on order data', () => {
-    const order = fixture('order-response.json')
-    order.data.new_future_field = 'some-value'
-    order.data.billing_info = { currency: 'USD', total: 26.5 }
-    const result = airaloOrderResponseSchema.parse(order)
-    expect(result.data.id).toBe(order.data.id)
+    const raw = fixture('order-response.json') as MutableFixture
+    raw.data.new_future_field = 'some-value'
+    raw.data.billing_info = { currency: 'USD', total: 26.5 }
+    const result = airaloOrderResponseSchema.parse(raw)
+    expect(result.data.id).toBeDefined()
     expect((result.data as Record<string, unknown>)['new_future_field']).toBeUndefined()
   })
 
   it('tolerates unknown fields on individual SIM entries', () => {
-    const order = fixture('order-response.json')
-    order.data.sims[0].activation_status = 'pending'
-    order.data.sims[0].network_name = 'NTT DoCoMo'
-    const result = airaloOrderResponseSchema.parse(order)
+    const raw = fixture('order-response.json') as MutableFixture
+    const firstSim = raw.data.sims?.[0]
+    expect(firstSim).toBeDefined()
+    firstSim!.activation_status = 'pending'
+    firstSim!.network_name = 'NTT DoCoMo'
+    const result = airaloOrderResponseSchema.parse(raw)
     expect(result.data.sims[0]!.iccid).toBeTruthy()
     expect(
       (result.data.sims[0] as Record<string, unknown>)['activation_status']
@@ -282,42 +295,42 @@ describe('backward compatibility — order', () => {
   })
 
   it('detects removal of required field (sims) as breaking', () => {
-    const order = fixture('order-response.json')
-    delete order.data.sims
-    expect(() => airaloOrderResponseSchema.parse(order)).toThrow(ZodError)
+    const raw = fixture('order-response.json') as MutableFixture
+    delete raw.data.sims
+    expect(() => airaloOrderResponseSchema.parse(raw)).toThrow(ZodError)
   })
 
   it('detects type change of required field (id: number→string) as breaking', () => {
-    const order = fixture('order-response.json')
-    order.data.id = 'string-id'
-    expect(() => airaloOrderResponseSchema.parse(order)).toThrow(ZodError)
+    const raw = fixture('order-response.json') as MutableFixture
+    raw.data.id = 'string-id'
+    expect(() => airaloOrderResponseSchema.parse(raw)).toThrow(ZodError)
   })
 })
 
 describe('backward compatibility — esim', () => {
   it('optional simable field absent is valid (older API version)', () => {
-    const esim = fixture('esim-response.json')
-    delete esim.data.simable
-    expect(() => airaloEsimResponseSchema.parse(esim)).not.toThrow()
+    const raw = fixture('esim-response.json') as MutableFixture
+    delete raw.data.simable
+    expect(() => airaloEsimResponseSchema.parse(raw)).not.toThrow()
   })
 
   it('optional brand_settings_name absent is valid', () => {
-    const esim = fixture('esim-response.json')
-    delete esim.data.brand_settings_name
-    expect(() => airaloEsimResponseSchema.parse(esim)).not.toThrow()
+    const raw = fixture('esim-response.json') as MutableFixture
+    delete raw.data.brand_settings_name
+    expect(() => airaloEsimResponseSchema.parse(raw)).not.toThrow()
   })
 
   it('optional direct_apple_installation_url absent is valid', () => {
-    const esim = fixture('esim-response.json')
-    delete esim.data.direct_apple_installation_url
-    expect(() => airaloEsimResponseSchema.parse(esim)).not.toThrow()
+    const raw = fixture('esim-response.json') as MutableFixture
+    delete raw.data.direct_apple_installation_url
+    expect(() => airaloEsimResponseSchema.parse(raw)).not.toThrow()
   })
 
   it('tolerates unknown fields from future API versions', () => {
-    const esim = fixture('esim-response.json')
-    esim.data.esim_profile_status = 'active'
-    esim.data.data_usage_mb = 150
-    const result = airaloEsimResponseSchema.parse(esim)
+    const raw = fixture('esim-response.json') as MutableFixture
+    raw.data.esim_profile_status = 'active'
+    raw.data.data_usage_mb = 150
+    const result = airaloEsimResponseSchema.parse(raw)
     expect(result.data.iccid).toBeTruthy()
     expect(
       (result.data as Record<string, unknown>)['esim_profile_status']
@@ -325,23 +338,24 @@ describe('backward compatibility — esim', () => {
   })
 
   it('detects removal of required field (iccid) as breaking', () => {
-    const esim = fixture('esim-response.json')
-    delete esim.data.iccid
-    expect(() => airaloEsimResponseSchema.parse(esim)).toThrow(ZodError)
+    const raw = fixture('esim-response.json') as MutableFixture
+    delete raw.data.iccid
+    expect(() => airaloEsimResponseSchema.parse(raw)).toThrow(ZodError)
   })
 
   it('detects type change of required field (id: number→string) as breaking', () => {
-    const esim = fixture('esim-response.json')
-    esim.data.id = 'not-a-number'
-    expect(() => airaloEsimResponseSchema.parse(esim)).toThrow(ZodError)
+    const raw = fixture('esim-response.json') as MutableFixture
+    raw.data.id = 'not-a-number'
+    expect(() => airaloEsimResponseSchema.parse(raw)).toThrow(ZodError)
   })
 })
 
 describe('backward compatibility — error schemas', () => {
   it('validation error tolerates extra fields in errors map', () => {
-    const err = fixture('order-validation-error.json')
-    err.data.errors.description = ['The description field is not allowed.']
-    expect(() => airaloValidationErrorSchema.parse(err)).not.toThrow()
+    const raw = fixture('order-validation-error.json') as MutableErrorFixture
+    raw.data.errors = raw.data.errors ?? {}
+    raw.data.errors.description = ['The description field is not allowed.']
+    expect(() => airaloValidationErrorSchema.parse(raw)).not.toThrow()
   })
 
   it('validation error still valid without optional errors map', () => {
@@ -363,26 +377,26 @@ describe('backward compatibility — error schemas', () => {
 
 describe('cross-fixture consistency', () => {
   it('esim fixture iccid appears in order fixture sims', () => {
-    const order = fixture('order-response.json')
-    const esim = fixture('esim-response.json')
-    const iccids = order.data.sims.map((s: { iccid: string }) => s.iccid)
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
+    const iccids = order.data.sims.map((s) => s.iccid)
     expect(iccids).toContain(esim.data.iccid)
   })
 
   it('esim simable order id matches order fixture id', () => {
-    const order = fixture('order-response.json')
-    const esim = fixture('esim-response.json')
-    expect(esim.data.simable.id).toBe(order.data.id)
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
+    expect(esim.data.simable?.id).toBe(order.data.id)
   })
 
   it('esim simable package_id matches order package_id', () => {
-    const order = fixture('order-response.json')
-    const esim = fixture('esim-response.json')
-    expect(esim.data.simable.package_id).toBe(order.data.package_id)
+    const order = airaloOrderResponseSchema.parse(fixture('order-response.json'))
+    const esim = airaloEsimResponseSchema.parse(fixture('esim-response.json'))
+    expect(esim.data.simable?.package_id).toBe(order.data.package_id)
   })
 
   it('token fixture produces a valid Bearer token format', () => {
-    const token = fixture('token-response.json')
+    const token = airaloTokenResponseSchema.parse(fixture('token-response.json'))
     const bearerHeader = `Bearer ${token.data.access_token}`
     expect(bearerHeader).toMatch(/^Bearer .+$/)
   })
@@ -392,25 +406,25 @@ describe('cross-fixture consistency', () => {
 
 describe('schema strictness — unknown fields', () => {
   it('token schema strips unknown fields (Zod default)', () => {
-    const token = fixture('token-response.json')
-    token.data.extra_field = 'should be stripped'
-    token.injected = true
-    const result = airaloTokenResponseSchema.parse(token)
+    const raw = fixture('token-response.json') as MutableFixture
+    raw.data.extra_field = 'should be stripped'
+    raw.injected = true
+    const result = airaloTokenResponseSchema.parse(raw)
     expect((result.data as Record<string, unknown>)['extra_field']).toBeUndefined()
     expect((result as Record<string, unknown>)['injected']).toBeUndefined()
   })
 
   it('order schema strips unknown fields', () => {
-    const order = fixture('order-response.json')
-    order.data.malicious_field = '<script>alert(1)</script>'
-    const result = airaloOrderResponseSchema.parse(order)
+    const raw = fixture('order-response.json') as MutableFixture
+    raw.data.malicious_field = '<script>alert(1)</script>'
+    const result = airaloOrderResponseSchema.parse(raw)
     expect((result.data as Record<string, unknown>)['malicious_field']).toBeUndefined()
   })
 
   it('esim schema strips unknown fields', () => {
-    const esim = fixture('esim-response.json')
-    esim.data.admin_override = true
-    const result = airaloEsimResponseSchema.parse(esim)
+    const raw = fixture('esim-response.json') as MutableFixture
+    raw.data.admin_override = true
+    const result = airaloEsimResponseSchema.parse(raw)
     expect((result.data as Record<string, unknown>)['admin_override']).toBeUndefined()
   })
 })

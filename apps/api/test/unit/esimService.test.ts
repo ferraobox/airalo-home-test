@@ -110,7 +110,7 @@ describe('createEsimService — get', () => {
 
   describe('Zod response validation', () => {
     it('throws when iccid is missing from response', async () => {
-      const bad = fixture('esim-response.json')
+      const bad = fixture('esim-response.json') as { data: Record<string, unknown> }
       delete bad.data.iccid
       const http = mockHttpGet(bad)
       const svc = createEsimService(http)
@@ -126,7 +126,7 @@ describe('createEsimService — get', () => {
     })
 
     it('throws when id field is not a number', async () => {
-      const bad = fixture('esim-response.json')
+      const bad = fixture('esim-response.json') as { data: Record<string, unknown> }
       bad.data.id = 'not-a-number'
       const http = mockHttpGet(bad)
       const svc = createEsimService(http)

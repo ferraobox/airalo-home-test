@@ -9,6 +9,7 @@ import { jest } from '@jest/globals'
 import type { AxiosInstance } from 'axios'
 import { createAuthService } from '../../src/services/authService'
 import { fixture } from '../../src/lib/fixture'
+import { airaloTokenResponseSchema } from '@airalo/shared'
 import { buildAxiosError } from '../helpers/factory'
 
 // ── Mock HTTP factory ───────────────────────────────────────
@@ -40,7 +41,7 @@ describe('createAuthService — getToken', () => {
     })
 
     it('returns the exact access_token from fixture', async () => {
-      const tokenFixture = fixture('token-response.json')
+      const tokenFixture = airaloTokenResponseSchema.parse(fixture('token-response.json'))
       const http = mockHttpPost(tokenFixture)
       const auth = createAuthService(http)
 

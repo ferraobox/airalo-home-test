@@ -27,7 +27,7 @@ describe('runAiraloOrderFlow', () => {
           .mockResolvedValue(orderResult),
         fetchEsim: jest
           .fn<AiraloFlowService['fetchEsim']>()
-          .mockImplementation(async (iccid: string) => buildEsimResult(iccid)),
+          .mockImplementation((iccid: string) => Promise.resolve(buildEsimResult(iccid))),
       })
 
       const result = await runAiraloOrderFlow(
@@ -59,7 +59,7 @@ describe('runAiraloOrderFlow', () => {
           .mockResolvedValue(orderResult),
         fetchEsim: jest
           .fn<AiraloFlowService['fetchEsim']>()
-          .mockImplementation(async (iccid: string) => buildEsimResult(iccid)),
+          .mockImplementation((iccid: string) => Promise.resolve(buildEsimResult(iccid))),
       })
 
       const result = await runAiraloOrderFlow({ packageId: 'pkg', quantity: 1 }, service)
@@ -76,7 +76,7 @@ describe('runAiraloOrderFlow', () => {
           .mockResolvedValue(orderResult),
         fetchEsim: jest
           .fn<AiraloFlowService['fetchEsim']>()
-          .mockImplementation(async (iccid: string) => buildEsimResult(iccid)),
+          .mockImplementation((iccid: string) => Promise.resolve(buildEsimResult(iccid))),
       })
 
       const result = await runAiraloOrderFlow({ packageId: 'pkg', quantity: 50 }, service)
@@ -125,9 +125,9 @@ describe('runAiraloOrderFlow', () => {
           .mockResolvedValue(orderResult),
         fetchEsim: jest
           .fn<AiraloFlowService['fetchEsim']>()
-          .mockImplementation(async (iccid: string) => {
+          .mockImplementation((iccid: string) => {
             callOrder.push(iccid)
-            return buildEsimResult(iccid)
+            return Promise.resolve(buildEsimResult(iccid))
           }),
       })
 
@@ -143,15 +143,15 @@ describe('runAiraloOrderFlow', () => {
       const service = createMockService({
         createOrder: jest
           .fn<AiraloFlowService['createOrder']>()
-          .mockImplementation(async () => {
+          .mockImplementation(() => {
             callSequence.push('createOrder')
-            return orderResult
+            return Promise.resolve(orderResult)
           }),
         fetchEsim: jest
           .fn<AiraloFlowService['fetchEsim']>()
-          .mockImplementation(async (iccid: string) => {
+          .mockImplementation((iccid: string) => {
             callSequence.push(`fetchEsim:${iccid}`)
-            return buildEsimResult(iccid)
+            return Promise.resolve(buildEsimResult(iccid))
           }),
       })
 
@@ -255,10 +255,11 @@ describe('runAiraloOrderFlow', () => {
           .mockResolvedValue(orderResult),
         fetchEsim: jest
           .fn<AiraloFlowService['fetchEsim']>()
-          .mockImplementation(async (iccid: string) => {
+          .mockImplementation((iccid: string) => {
             callCount++
-            if (callCount === 2) throw buildAxiosError(500, 'Internal Server Error')
-            return buildEsimResult(iccid)
+            if (callCount === 2)
+              return Promise.reject(buildAxiosError(500, 'Internal Server Error'))
+            return Promise.resolve(buildEsimResult(iccid))
           }),
       })
 

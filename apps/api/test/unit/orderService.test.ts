@@ -174,7 +174,9 @@ describe('createOrderService — submit', () => {
 
   describe('Zod response validation', () => {
     it('throws when sims array is empty (min:1 constraint)', async () => {
-      const bad = fixture('order-response.json')
+      const bad = fixture('order-response.json') as {
+        data: Record<string, unknown> & { sims?: unknown[] }
+      }
       bad.data.sims = []
       const http = mockHttpPost(bad)
       const svc = createOrderService(http)
@@ -190,7 +192,7 @@ describe('createOrderService — submit', () => {
     })
 
     it('throws when package_id is missing', async () => {
-      const bad = fixture('order-response.json')
+      const bad = fixture('order-response.json') as { data: Record<string, unknown> }
       delete bad.data.package_id
       const http = mockHttpPost(bad)
       const svc = createOrderService(http)

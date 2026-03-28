@@ -92,7 +92,9 @@ test(`${country.name} eSIM — search → ${pkg.tab} ${pkg.duration} → verify 
 
   await test.step('"Choose your package" title is visible', async () => {
     await expect(packages.productDetailsTitle).toBeVisible()
-    await expect(packages.productDetailsTitle).toHaveText(lang.packagePage.chooseYourPackage)
+    await expect(packages.productDetailsTitle).toHaveText(
+      lang.packagePage.chooseYourPackage
+    )
   })
 
   await test.step('check compatibility button is visible', async () => {
@@ -208,7 +210,9 @@ test(`${country.name} eSIM — search → ${pkg.tab} ${pkg.duration} → verify 
 
   await test.step('"Package details" button is available', async () => {
     await expect(packages.packageDetailsButton).toBeVisible()
-    await expect(packages.packageDetailsButton).toHaveText(lang.packagePage.packageDetails)
+    await expect(packages.packageDetailsButton).toHaveText(
+      lang.packagePage.packageDetails
+    )
   })
 
   await test.step('open Package details and verify plan information', async () => {
@@ -345,12 +349,16 @@ test(`Homepage search — autocomplete, case-insensitive, invalid input [${count
   await test.step('search is case-insensitive', async () => {
     await home.searchCountry(termLower)
     await expect(home.searchDropdown).toBeVisible({ timeout: 10000 })
-    await expect(home.searchResultOption(new RegExp(term, 'i'))).toBeVisible({ timeout: 5000 })
+    await expect(home.searchResultOption(new RegExp(term, 'i'))).toBeVisible({
+      timeout: 5000,
+    })
   })
 
   await test.step('search with partial match shows autocomplete', async () => {
     await home.searchCountry(termPartial)
-    await expect(home.searchResultOption(new RegExp(term, 'i'))).toBeVisible({ timeout: 5000 })
+    await expect(home.searchResultOption(new RegExp(term, 'i'))).toBeVisible({
+      timeout: 5000,
+    })
   })
 
   await test.step('search for non-existent country shows empty results', async () => {
@@ -361,7 +369,9 @@ test(`Homepage search — autocomplete, case-insensitive, invalid input [${count
 
   await test.step('clearing search input resets dropdown', async () => {
     await home.searchInput.fill('')
-    await expect(home.searchResultOption(new RegExp(term, 'i'))).not.toBeVisible({ timeout: 5000 })
+    await expect(home.searchResultOption(new RegExp(term, 'i'))).not.toBeVisible({
+      timeout: 5000,
+    })
   })
 
   await test.step('page loads within acceptable time', async () => {

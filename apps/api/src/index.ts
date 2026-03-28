@@ -15,9 +15,7 @@ export type { AiraloFlowService, AiraloFlowResult } from './services/flowService
 
 // ── Types ────────────────────────────────────────────────────
 export type { AiraloOrderResult, AiraloEsimResult } from './types/airalo'
-
-// ── Schemas ──────────────────────────────────────────────────
-export { submitOrderRequestSchema } from './schemas/request'
+export type { MutableFixture, MutableErrorFixture } from './types/fixture'
 
 // ── Config ───────────────────────────────────────────────────
 export { loadApiEnv } from './config/env'

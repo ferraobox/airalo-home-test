@@ -1,1 +1,1 @@
-export * from './airalo-api';
+export * from './airalo-api'

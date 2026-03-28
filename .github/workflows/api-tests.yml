@@ -109,7 +109,6 @@ jobs:
     timeout-minutes: 15
     needs: [lint]
     if: github.event_name == 'workflow_dispatch' || github.event_name == 'push'
-    environment: integration
     steps:
       - uses: actions/checkout@v4
 

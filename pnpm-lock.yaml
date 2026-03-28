@@ -42,6 +42,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@airalo/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       axios:
         specifier: ^1.8.4
         version: 1.13.6

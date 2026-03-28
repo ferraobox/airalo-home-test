@@ -7,19 +7,7 @@ import {
   airaloAuthErrorSchema,
 } from '@airalo/shared'
 import { fixture } from '../../src/lib/fixture'
-
-/** Mutable raw fixture for schema rejection / backward-compat tests */
-interface MutableFixture {
-  data: Record<string, unknown> & { sims?: Array<Record<string, unknown>> }
-  meta?: Record<string, unknown>
-  [key: string]: unknown
-}
-
-/** Mutable error fixture for error schema tests */
-interface MutableErrorFixture {
-  data: Record<string, unknown> & { errors?: Record<string, unknown> }
-  [key: string]: unknown
-}
+import type { MutableFixture, MutableErrorFixture } from '../../src/types/fixture'
 
 // ── Token contract ──────────────────────────────────────────
 

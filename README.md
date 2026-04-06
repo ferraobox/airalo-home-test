@@ -2,7 +2,7 @@
 
 Monorepo for automated testing of the **Airalo Partner API** and **Airalo website** — covering API contract validation, state machine lifecycle testing, browser E2E flows, accessibility compliance, and performance benchmarking.
 
-**Live Reporting:** [https://ferraobox.github.io/airalo-home-test/](https://ferraobox.github.io/airalo-home-test/)
+**Live Reporting:** [https://ferraobox.github.io/testing-example/](https://ferraobox.github.io/testing-example/)
 
 ---
 
@@ -36,7 +36,7 @@ This project follows **Spec-Driven Development (SDD)** — specs are written fir
 ## Repository Layout
 
 ```
-airalo-home-test/
+testing-example/
 ├── apps/
 │   ├── api/                     # API automation
 │   │   ├── src/
@@ -336,7 +336,7 @@ Lint → Unit → E2E (matrix) → Accessibility (matrix) → Performance (matri
 
 Allure HTML reports are published to GitHub Pages after every CI run:
 
-**[https://ferraobox.github.io/airalo-home-test/](https://ferraobox.github.io/airalo-home-test/)**
+**[https://ferraobox.github.io/testing-example/](https://ferraobox.github.io/testing-example/)**
 
 - API results: `api-allure/` subdirectory
 - Web results: `web-allure/` subdirectory
